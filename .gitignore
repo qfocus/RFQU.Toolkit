@@ -1,0 +1,6 @@
+# common
+.gitignore
+# c#:
+.dll
+bin
+obj
