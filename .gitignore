@@ -1,6 +1,8 @@
 # common
 .gitignore
+
 # c#:
 .dll
+.suo
 bin
 obj
