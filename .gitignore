@@ -2,7 +2,7 @@
 .gitignore
 
 # c#:
-.dll
-.suo
+*.dll
+*.suo
 bin
 obj
