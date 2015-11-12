@@ -11,9 +11,9 @@ namespace FileRenamer
     {
         public static void RegisterTypes(IUnityContainer container)
         {
-            container.RegisterType<IFileReNamer, RemoveCharacter>("remove");
+            container.RegisterType<IFileRenamer, RemoveCharacter>("RemoveCharacter");
 
-            container.RegisterType<IFileReNamer, ReplaceCharacter>("replace");
+            container.RegisterType<IFileRenamer, ReplaceCharacter>("ReplaceCharacter");
         }
     }
 }

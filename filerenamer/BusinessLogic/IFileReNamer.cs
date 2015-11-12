@@ -5,8 +5,8 @@ using System.Text;
 
 namespace FileRenamer.BusinessLogic
 {
-    public interface IFileReNamer
+    public interface IFileRenamer
     {
-        void Rename(string originName);
+        string Rename(string name, string expression);
     }
 }

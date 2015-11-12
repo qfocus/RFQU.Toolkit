@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using Microsoft.Practices.Unity;
@@ -15,6 +10,8 @@ namespace FileRenamer
     public partial class Form1 : Form
     {
         private IUnityContainer _container;
+
+        IFileRenamer _renamer;
 
         public Form1(IUnityContainer container)
         {
@@ -36,29 +33,47 @@ namespace FileRenamer
 
             lblFolderLocation.Text = fbdChooseFolder.SelectedPath;
 
-            Rename();
         }
 
         private void InitializeData()
         {
             cbRenameType.DataSource = new List<string>() { "RemoveCharacter", "ReplaceCharacter" };
 
-            IFileReNamer renamer = _container.Resolve<IFileReNamer>("replace");
+            _renamer = _container.Resolve<IFileRenamer>("RemoveCharacter");
 
-            renamer.Rename("x");
         }
 
-
-        private void Rename()
+        private void btnExecute_Click(object sender, EventArgs e)
         {
-            string[] files = Directory.GetFiles(fbdChooseFolder.SelectedPath);
+            PreView();
 
-            foreach (var item in files)
-            {
-                string fileName = Path.GetFileNameWithoutExtension(item);
-
-
-            }
         }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            PreView();
+        }
+
+        private void cbRenameType_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string name = ((ComboBox)sender).Text;
+
+            this._renamer = _container.Resolve<IFileRenamer>(name);
+        }
+
+        private void PreView()
+        {
+            var files = Directory.GetFiles(fbdChooseFolder.SelectedPath);
+
+            string originName = Path.GetFileName(files[0]);
+
+            string newName = _renamer.Rename(originName, txtExpression.Text);
+
+            lblOriginName.Text = originName;
+
+            lblNewName.Text = newName;
+
+        }
+
     }
 }

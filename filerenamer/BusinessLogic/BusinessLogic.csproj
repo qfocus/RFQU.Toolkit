@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IFileReNamer.cs" />
+    <Compile Include="Guard.cs" />
+    <Compile Include="IFileRenamer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegexCharacter.cs" />
     <Compile Include="RemoveCharacter.cs" />
     <Compile Include="ReplaceCharacter.cs" />
   </ItemGroup>
