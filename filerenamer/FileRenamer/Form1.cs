@@ -45,12 +45,24 @@ namespace FileRenamer
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
-            PreView();
+            var files = Directory.GetFiles(fbdChooseFolder.SelectedPath);
 
+            foreach (var item in files)
+            {
+                string originName = Path.GetFileName(item);
+
+                string newName = _renamer.Rename(originName, txtExpression.Text);
+
+                string newPath = Path.Combine(fbdChooseFolder.SelectedPath, newName);
+
+                File.Move(item, newPath);
+
+            }
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
+
             PreView();
         }
 
@@ -63,6 +75,11 @@ namespace FileRenamer
 
         private void PreView()
         {
+            if (string.IsNullOrEmpty(txtExpression.Text) || string.IsNullOrEmpty(fbdChooseFolder.SelectedPath))
+            {
+                return;
+            }
+
             var files = Directory.GetFiles(fbdChooseFolder.SelectedPath);
 
             string originName = Path.GetFileName(files[0]);
