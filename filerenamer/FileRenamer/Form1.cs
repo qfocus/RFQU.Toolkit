@@ -33,6 +33,8 @@ namespace FileRenamer
 
             lblFolderLocation.Text = fbdChooseFolder.SelectedPath;
 
+            btnExecute.Enabled = false;
+
         }
 
         private void InitializeData()
@@ -62,7 +64,6 @@ namespace FileRenamer
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-
             PreView();
         }
 
@@ -90,6 +91,7 @@ namespace FileRenamer
 
             lblNewName.Text = newName;
 
+            btnExecute.Enabled = true;
         }
 
     }
