@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using Microsoft.Practices.Unity;
-using FileRenamer.BusinessLogic;
+using FileRenamer.Business;
 
-namespace FileRenamer
+namespace FileRenamer.UI
 {
     public partial class Form1 : Form
     {

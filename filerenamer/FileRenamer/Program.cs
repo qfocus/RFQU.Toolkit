@@ -1,10 +1,11 @@
-﻿using Microsoft.Practices.Unity;
+﻿using FileRenamer.Business;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace FileRenamer
+namespace FileRenamer.UI
 {
     static class Program
     {

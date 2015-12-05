@@ -1,11 +1,11 @@
-﻿using FileRenamer.BusinessLogic;
+﻿
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FileRenamer
+namespace FileRenamer.Business
 {
     public class ContainerBootstrapper
     {

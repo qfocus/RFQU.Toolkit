@@ -1,4 +1,4 @@
-﻿namespace FileRenamer
+﻿namespace FileRenamer.UI
 {
     partial class Form1
     {
