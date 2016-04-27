@@ -7,12 +7,9 @@ namespace FileRenamer.BusinessLogic
 {
     public class ReplaceCharacter : IFileRenamer
     {
-
-
-
-        public string Rename(string name, string expression)
+        public string Rename(string name, string oldValue, string newValue)
         {
-            throw new NotImplementedException();
+            return name.Replace(oldValue, newValue);
         }
     }
 }

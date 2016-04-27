@@ -31,7 +31,7 @@ namespace FileRenamer
                 return;
             }
 
-            lblFolderLocation.Text = fbdChooseFolder.SelectedPath;
+            txtSourceFolder.Text = fbdChooseFolder.SelectedPath;
 
             btnExecute.Enabled = false;
 
@@ -47,15 +47,20 @@ namespace FileRenamer
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
-            var files = Directory.GetFiles(fbdChooseFolder.SelectedPath);
+            if (!IsValid())
+            {
+                return;
+            }
+
+            var files = Directory.GetFiles(txtSourceFolder.Text);
 
             foreach (var item in files)
             {
                 string originName = Path.GetFileName(item);
 
-                string newName = _renamer.Rename(originName, txtExpression.Text);
+                string newName = _renamer.Rename(originName, txtOldCharacter.Text, txtNewCharacter.Text);
 
-                string newPath = Path.Combine(fbdChooseFolder.SelectedPath, newName);
+                string newPath = Path.Combine(txtSourceFolder.Text, newName);
 
                 File.Move(item, newPath);
 
@@ -76,22 +81,42 @@ namespace FileRenamer
 
         private void PreView()
         {
-            if (string.IsNullOrEmpty(txtExpression.Text) || string.IsNullOrEmpty(fbdChooseFolder.SelectedPath))
+            if (!IsValid())
             {
                 return;
             }
 
-            var files = Directory.GetFiles(fbdChooseFolder.SelectedPath);
+            var files = Directory.GetFiles(txtSourceFolder.Text);
 
             string originName = Path.GetFileName(files[0]);
 
-            string newName = _renamer.Rename(originName, txtExpression.Text);
+            string newName = _renamer.Rename(originName, txtOldCharacter.Text, txtNewCharacter.Text);
 
-            lblOriginName.Text = originName;
+            lblOldName.Text = originName;
 
             lblNewName.Text = newName;
 
             btnExecute.Enabled = true;
+        }
+
+        private bool IsValid()
+        {
+            if (string.IsNullOrEmpty(txtSourceFolder.Text))
+            {
+                return false;
+            }
+
+            if (!Directory.Exists(txtSourceFolder.Text.Trim()))
+            {
+                return false;            
+            }
+
+            if (string.IsNullOrEmpty(txtOldCharacter.Text))
+            {
+                return false;
+            }
+
+            return true;
         }
 
     }

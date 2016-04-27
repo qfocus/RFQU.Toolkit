@@ -8,9 +8,9 @@ namespace FileRenamer.BusinessLogic
 {
     public class RemoveCharacter : IFileRenamer
     {
-        public string Rename(string name, string expression)
+        public string Rename(string name, string oldValue, string newValue)
         {
-            return name.Replace(expression, string.Empty);
+            return name.Replace(oldValue, string.Empty);
         }
     }
 }

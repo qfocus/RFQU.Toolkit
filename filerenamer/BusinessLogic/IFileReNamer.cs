@@ -7,6 +7,6 @@ namespace FileRenamer.BusinessLogic
 {
     public interface IFileRenamer
     {
-        string Rename(string name, string expression);
+        string Rename(string name, string oldValue, string newValue);
     }
 }
