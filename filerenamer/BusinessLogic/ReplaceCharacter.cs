@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FileRenamer.BusinessLogic
+namespace FileRenamer.Business
 {
     public class ReplaceCharacter : IFileRenamer
     {

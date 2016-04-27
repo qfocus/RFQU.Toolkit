@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileRenamer", "FileRenamer\FileRenamer.csproj", "{20BB222A-078D-455B-B1CA-70B05C502AF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileRenamer.UI", "FileRenamer\FileRenamer.UI.csproj", "{20BB222A-078D-455B-B1CA-70B05C502AF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{D7E2EE1D-8E06-4B26-B4D1-A56B2C818B28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileRenamer.Business", "BusinessLogic\FileRenamer.Business.csproj", "{D7E2EE1D-8E06-4B26-B4D1-A56B2C818B28}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{38DB9582-ADBE-406D-BB25-65EDD5437A0C}"
 	ProjectSection(SolutionItems) = preProject

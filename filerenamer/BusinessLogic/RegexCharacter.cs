@@ -1,4 +1,4 @@
-﻿using FileRenamer.BusinessLogic;
+﻿using FileRenamer.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
