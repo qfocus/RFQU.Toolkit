@@ -59,6 +59,12 @@ namespace FileRenamer.UI
                 string originName = Path.GetFileName(item);
 
                 string newName = _renamer.Rename(originName, txtOldCharacter.Text, txtNewCharacter.Text);
+               
+                //name doesn't change
+                if (string.Equals(originName, newName))
+                {
+                    continue;
+                }
 
                 string newPath = Path.Combine(txtSourceFolder.Text, newName);
 
