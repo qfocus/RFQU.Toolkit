@@ -8,7 +8,7 @@ namespace FileRenamer.Business
     public class ReplaceCharacter : IFileRenamer
     {
         public string Rename(string name, string oldValue, string newValue)
-        {
+        {      
             return name.Replace(oldValue, newValue);
         }
     }

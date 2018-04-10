@@ -37,12 +37,12 @@
             this.cbRenameType = new System.Windows.Forms.ComboBox();
             this.txtOldCharacter = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblOldName = new System.Windows.Forms.Label();
-            this.lblNewName = new System.Windows.Forms.Label();
             this.btnPreview = new System.Windows.Forms.Button();
             this.txtSourceFolder = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtNewCharacter = new System.Windows.Forms.TextBox();
+            this.lbSource = new System.Windows.Forms.ListBox();
+            this.lbResult = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // btnChooseFolder
@@ -53,12 +53,12 @@
             this.btnChooseFolder.TabIndex = 0;
             this.btnChooseFolder.Text = "Choose Folder";
             this.btnChooseFolder.UseVisualStyleBackColor = true;
-            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
+            this.btnChooseFolder.Click += new System.EventHandler(this.BtnChooseFolder_Click);
             // 
             // btnExecute
             // 
             this.btnExecute.Enabled = false;
-            this.btnExecute.Location = new System.Drawing.Point(559, 377);
+            this.btnExecute.Location = new System.Drawing.Point(812, 617);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(75, 23);
             this.btnExecute.TabIndex = 2;
@@ -78,7 +78,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 210);
+            this.label2.Location = new System.Drawing.Point(458, 172);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 3;
@@ -107,7 +107,7 @@
             // 
             this.txtOldCharacter.Location = new System.Drawing.Point(115, 98);
             this.txtOldCharacter.Name = "txtOldCharacter";
-            this.txtOldCharacter.Size = new System.Drawing.Size(519, 20);
+            this.txtOldCharacter.Size = new System.Drawing.Size(665, 20);
             this.txtOldCharacter.TabIndex = 5;
             // 
             // label4
@@ -119,27 +119,9 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Before :";
             // 
-            // lblOldName
-            // 
-            this.lblOldName.AutoSize = true;
-            this.lblOldName.Location = new System.Drawing.Point(112, 172);
-            this.lblOldName.Name = "lblOldName";
-            this.lblOldName.Size = new System.Drawing.Size(50, 13);
-            this.lblOldName.TabIndex = 3;
-            this.lblOldName.Text = "old name";
-            // 
-            // lblNewName
-            // 
-            this.lblNewName.AutoSize = true;
-            this.lblNewName.Location = new System.Drawing.Point(112, 210);
-            this.lblNewName.Name = "lblNewName";
-            this.lblNewName.Size = new System.Drawing.Size(56, 13);
-            this.lblNewName.TabIndex = 3;
-            this.lblNewName.Text = "new name";
-            // 
             // btnPreview
             // 
-            this.btnPreview.Location = new System.Drawing.Point(456, 377);
+            this.btnPreview.Location = new System.Drawing.Point(705, 617);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(75, 23);
             this.btnPreview.TabIndex = 2;
@@ -153,6 +135,7 @@
             this.txtSourceFolder.Name = "txtSourceFolder";
             this.txtSourceFolder.Size = new System.Drawing.Size(515, 20);
             this.txtSourceFolder.TabIndex = 6;
+            this.txtSourceFolder.TextChanged += new System.EventHandler(this.TxtSourceFolder_TextChanged);
             // 
             // label5
             // 
@@ -165,24 +148,41 @@
             // 
             // txtNewCharacter
             // 
+            this.txtNewCharacter.Enabled = false;
             this.txtNewCharacter.Location = new System.Drawing.Point(115, 134);
             this.txtNewCharacter.Name = "txtNewCharacter";
-            this.txtNewCharacter.Size = new System.Drawing.Size(519, 20);
+            this.txtNewCharacter.Size = new System.Drawing.Size(665, 20);
             this.txtNewCharacter.TabIndex = 5;
+            // 
+            // lbSource
+            // 
+            this.lbSource.FormattingEnabled = true;
+            this.lbSource.Location = new System.Drawing.Point(64, 172);
+            this.lbSource.Name = "lbSource";
+            this.lbSource.Size = new System.Drawing.Size(391, 433);
+            this.lbSource.TabIndex = 9;
+            // 
+            // lbResult
+            // 
+            this.lbResult.FormattingEnabled = true;
+            this.lbResult.Location = new System.Drawing.Point(496, 172);
+            this.lbResult.Name = "lbResult";
+            this.lbResult.Size = new System.Drawing.Size(391, 433);
+            this.lbResult.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 413);
+            this.ClientSize = new System.Drawing.Size(899, 652);
+            this.Controls.Add(this.lbResult);
+            this.Controls.Add(this.lbSource);
             this.Controls.Add(this.txtSourceFolder);
             this.Controls.Add(this.txtNewCharacter);
             this.Controls.Add(this.txtOldCharacter);
             this.Controls.Add(this.cbRenameType);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblNewName);
-            this.Controls.Add(this.lblOldName);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
@@ -210,12 +210,12 @@
         private System.Windows.Forms.ComboBox cbRenameType;
         private System.Windows.Forms.TextBox txtOldCharacter;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblOldName;
-        private System.Windows.Forms.Label lblNewName;
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.TextBox txtSourceFolder;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtNewCharacter;
+        private System.Windows.Forms.ListBox lbSource;
+        private System.Windows.Forms.ListBox lbResult;
     }
 }
 

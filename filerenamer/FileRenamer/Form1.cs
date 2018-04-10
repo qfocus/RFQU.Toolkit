@@ -9,9 +9,12 @@ namespace FileRenamer.UI
 {
     public partial class Form1 : Form
     {
+
+        private string removeOperator = "RemoveCharacter";
+        private string replaceOperator = "ReplaceCharacter";
         private IUnityContainer _container;
 
-        IFileRenamer _renamer;
+        IFileRenamer renamer;
 
         public Form1(IUnityContainer container)
         {
@@ -22,7 +25,7 @@ namespace FileRenamer.UI
             InitializeData();
         }
 
-        private void btnChooseFolder_Click(object sender, EventArgs e)
+        private void BtnChooseFolder_Click(object sender, EventArgs e)
         {
             DialogResult result = fbdChooseFolder.ShowDialog();
 
@@ -30,6 +33,8 @@ namespace FileRenamer.UI
             {
                 return;
             }
+
+            ShowSource();
 
             txtSourceFolder.Text = fbdChooseFolder.SelectedPath;
 
@@ -41,7 +46,7 @@ namespace FileRenamer.UI
         {
             cbRenameType.DataSource = new List<string>() { "RemoveCharacter", "ReplaceCharacter" };
 
-            _renamer = _container.Resolve<IFileRenamer>("RemoveCharacter");
+            renamer = _container.Resolve<IFileRenamer>("RemoveCharacter");
 
         }
 
@@ -58,8 +63,8 @@ namespace FileRenamer.UI
             {
                 string originName = Path.GetFileName(item);
 
-                string newName = _renamer.Rename(originName, txtOldCharacter.Text, txtNewCharacter.Text);
-               
+                string newName = renamer.Rename(originName, txtOldCharacter.Text, txtNewCharacter.Text);
+
                 //name doesn't change
                 if (string.Equals(originName, newName))
                 {
@@ -71,6 +76,8 @@ namespace FileRenamer.UI
                 File.Move(item, newPath);
 
             }
+            MessageBox.Show("Complete!", "Complete!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ShowSource();            
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
@@ -82,48 +89,86 @@ namespace FileRenamer.UI
         {
             string name = ((ComboBox)sender).Text;
 
-            this._renamer = _container.Resolve<IFileRenamer>(name);
+            this.renamer = _container.Resolve<IFileRenamer>(name);
+
+            if (name == removeOperator)
+            {
+                txtNewCharacter.Enabled = false;
+            }
+            else
+            {
+                txtNewCharacter.Enabled = true;
+            }
+
         }
 
         private void PreView()
         {
+            ClearResult();
+
             if (!IsValid())
+            {
+                return;
+            }
+
+
+            var files = Directory.GetFiles(txtSourceFolder.Text);
+
+            foreach (var item in files)
+            {
+                string originName = Path.GetFileName(item);
+
+                string newName = renamer.Rename(originName, txtOldCharacter.Text, txtNewCharacter.Text);
+
+                lbResult.Items.Add(newName);
+            }
+
+            btnExecute.Enabled = true;
+        }
+
+        private void ShowSource()
+        {
+            lbSource.Items.Clear();
+            if (txtSourceFolder.Text == null || !Directory.Exists(txtSourceFolder.Text.Trim()))
             {
                 return;
             }
 
             var files = Directory.GetFiles(txtSourceFolder.Text);
 
-            string originName = Path.GetFileName(files[0]);
+            foreach (var file in files)
+            {
+                string name = Path.GetFileName(file);
+                lbSource.Items.Add(name);
+            }
 
-            string newName = _renamer.Rename(originName, txtOldCharacter.Text, txtNewCharacter.Text);
+        }
 
-            lblOldName.Text = originName;
+        private void ClearSource()
+        {
+            lbSource.Items.Clear();
+        }
 
-            lblNewName.Text = newName;
-
-            btnExecute.Enabled = true;
+        private void ClearResult()
+        {
+            lbResult.Items.Clear();
         }
 
         private bool IsValid()
         {
-            if (string.IsNullOrEmpty(txtSourceFolder.Text))
+            if (!string.IsNullOrEmpty(txtSourceFolder.Text) &&
+                Directory.Exists(txtSourceFolder.Text.Trim()) &&
+                !string.IsNullOrEmpty(txtOldCharacter.Text))
             {
-                return false;
+                return true;
             }
-
-            if (!Directory.Exists(txtSourceFolder.Text.Trim()))
-            {
-                return false;            
-            }
-
-            if (string.IsNullOrEmpty(txtOldCharacter.Text))
-            {
-                return false;
-            }
-
-            return true;
+            MessageBox.Show("Invalid input!");
+            return false;
         }
 
+        private void TxtSourceFolder_TextChanged(object sender, EventArgs e)
+        {
+            ShowSource();
+        }
     }
 }
