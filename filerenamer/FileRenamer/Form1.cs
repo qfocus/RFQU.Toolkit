@@ -44,7 +44,7 @@ namespace FileRenamer.UI
 
         private void InitializeData()
         {
-            cbRenameType.DataSource = new List<string>() { "RemoveCharacter", "ReplaceCharacter" };
+            cbRenameType.DataSource = new List<string>() { "RemoveCharacter", "ReplaceCharacter", "RegexCharacter" };
 
             renamer = _container.Resolve<IFileRenamer>("RemoveCharacter");
 
@@ -72,12 +72,17 @@ namespace FileRenamer.UI
                 }
 
                 string newPath = Path.Combine(txtSourceFolder.Text, newName);
+                if (File.Exists(newPath))
+                {
+                    MessageBox.Show(newPath + " is exists!");
+                    continue;
+                }
 
                 File.Move(item, newPath);
 
             }
             MessageBox.Show("Complete!", "Complete!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ShowSource();            
+            ShowSource();
         }
 
         private void btnPreview_Click(object sender, EventArgs e)

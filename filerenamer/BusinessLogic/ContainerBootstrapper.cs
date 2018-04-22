@@ -1,4 +1,5 @@
 ﻿
+using BusinessLogic;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace FileRenamer.Business
             container.RegisterType<IFileRenamer, RemoveCharacter>("RemoveCharacter");
 
             container.RegisterType<IFileRenamer, ReplaceCharacter>("ReplaceCharacter");
+
+            container.RegisterType<IFileRenamer, RegexCharacter>("RegexCharacter");
         }
     }
 }
